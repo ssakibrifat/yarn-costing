@@ -752,17 +752,17 @@ html[data-theme="light"] .btn::before{background:linear-gradient(105deg,transpar
         <details><summary>Fibre prices and fixed cost</summary><div class="inner">
           <div class="tw"><table id="R_pt"></table></div>
           <div class="row3 rfac" style="margin-top:12px"><div class="fld"><label for="R_fx">Fixed cost</label><input id="R_fx" type="number" step="0.1" value="4.5"></div>
-            <div class="fld"><label for="R_kv">Virgin factor</label><input id="R_kv" type="number" step="0.01" value="1.05"></div>
-            <div class="fld"><label for="R_k1">Cotton factor</label><input id="R_k1" type="number" step="0.01" value="1.03"></div></div>
+            <div class="fld" hidden><label for="R_kv">Virgin factor</label><input id="R_kv" type="number" step="0.01" value="1.05"></div>
+            <div class="fld" hidden><label for="R_k1">Cotton factor</label><input id="R_k1" type="number" step="0.01" value="1.03"></div></div>
           <div class="row3 rfac" style="margin-top:10px"><div class="fld"><label for="R_eff">Spinning efficiency</label><input id="R_eff" type="number" step="0.001" value="0.94"></div></div>
-          <p class="hint">Cotton grades are in $/lb (×2.2046 = $/kg), everything else in $/kg. Clean cost = price/kg ÷ Y/R%. Mixes with no polyester, recycled polyester or viscose use a factor instead of Y/R%: the virgin factor (1.05) when the mix is only virgin cotton, otherwise the cotton factor (1.03) for loose cotton, D1D2, noil, RBD and waste mixes. Cotton, polyester, recycled cotton and other fibre grades come from the master price list (14/10/2026); D1D2, noil, filter, hard waste, RBD and loose cotton follow the OE costing sheet (01/09/2026). <span id="R_th"></span></p></div></details>
+          <p class="hint">Cotton grades are in $/lb (×2.2046 = $/kg), everything else in $/kg. Clean cost = price/kg ÷ Y/R% for every fibre, as in the master Rotor (OE) tab (factory decision 8 Nov 2026: no waste multipliers). Y/R% follows the master OE Yarn realization table: cotton, loose, noil, pneumafil, hard waste 90; D1D2 and recycle cotton / RBD 70; filter 85; polyester and viscose 95. Cotton, polyester, recycled cotton and other fibre grades come from the master price list (14/10/2026); D1D2, noil, filter, hard waste, RBD and loose cotton follow the OE costing sheet (01/09/2026). <span id="R_th"></span></p></div></details>
         <details><summary>How it is calculated</summary><div class="inner prose">
           <p>TPI = √Count × TM. Kg/spl/day = 7.2 × Speed ÷ Count ÷ TPI × 0.95 ÷ 1000 × 3.</p>
           <p>Spinning cost = Fixed cost ÷ Kg/spl/day ÷ spinning efficiency (0.94 as in the weekly factory sheet). Total = Spinning + clean fibre cost.</p>
           <p>Margin % is on cost, as in the OE costing sheet. Margin type uses margin per month on 1000 spindles. <b>Margin / kg (TCC)</b> = selling price − total cost. <b>Conv. costing / kg (CC)</b> = selling price − fibre cost.</p>
           <p><b>Mix option:</b> the "fibre not available" conditions come from the Process wise Mixing plan remarks (issue 04); choose one and the fibre is swapped at the same %. The other options load a different standard mix, such as Loose 50 / D1D2 30 / RBD 20 or Virgin 70 / Noil 30.</p>
           <p><b>Factory sheet 19/10/2026:</b> 30/1 CVC 60/40 virgin (SM Knitwear), TM 4.0, 115,000 rpm, Brazil cotton 0.95 and Polyester GRS 1.45/kg gives a total of 3.34. Cotton blends now use Regular Cotton Brazil by default (100% cotton stays on Australia).</p>
-          <p><b>Factory week 43 (17 to 23 Oct 2026):</b> the 12 Rotor orders were checked against the app. D1D2 is now 0.94. Speed and TM follow the weekly factory sheet for Virgin KH (14s to 30s), Non virgin KH 8s and 14s, CVC virgin 20s, CVC 80/20 12s and PC 65/35 KH 16s. As in the factory sheet, 100% virgin cotton is priced at ×1.05 and every other cotton-only mix at ×1.03 (both boxes above can be changed). The factory Non virgin KH sheet prices its 40% cotton at Loose cotton 0.85/lb, so Cotton-KH Non virgin now opens with Loose cotton 40 / Noil 60 (8s 1.780, 10s 1.885, 14s 2.192 as in the factory sheet). Cotton-KW 7s follows the factory sheet at 90,000 rpm.</p>
+          <p><b>Factory week 43 (17 to 23 Oct 2026):</b> the 12 Rotor orders were checked against the app. D1D2 is now 0.94. Speed and TM follow the weekly factory sheet for Virgin KH (14s to 30s), Non virgin KH 8s and 14s, CVC virgin 20s, CVC 80/20 12s and PC 65/35 KH 16s. Every fibre is now priced at price ÷ Y/R%, the same as the master file. The factory Non virgin KH sheet prices its 40% cotton at Loose cotton 0.85/lb, so Cotton-KH Non virgin now opens with Loose cotton 40 / Noil 60 (8s 1.780, 10s 1.885, 14s 2.192 as in the factory sheet). Cotton-KW 7s follows the factory sheet at 90,000 rpm.</p>
           <p><b>Denim:</b> the Denim process prices D1&amp;D2 at 0.39/lb (0.86/kg) and uses a spinning efficiency of 0.982. Other processes keep D1D2 0.94 and efficiency 0.94.</p>
           <p><b>Factory breakeven quotes:</b> Cotton-KW 6s with Regenagri 70 / RBD 30 gives 2.28, Cotton-KW 7s gives about 1.97 (quoted 1.95, factory sheet speed), and Cotton-KH 20s with Virgin 70 / Noil 30 gives about 2.56 (quoted 2.55).</p></div></details>
       </div>
@@ -773,7 +773,7 @@ html[data-theme="light"] .btn::before{background:linear-gradient(105deg,transpar
           <p>Rotor also divides the spinning cost by the spinning efficiency (0.94 unless a process sets another).</p></div></details>
         <details class="qa" data-grp="faq"><summary>What does Y/R mean?</summary><div class="qa-a">
           <p>Y/R is the share of the bought fibre that ends up as yarn. At 70% Y/R, 1 kg of yarn needs about 1.43 kg of fibre, so the fibre cost is the price ÷ 0.70.</p>
-          <p>Ring and Vortex 100% cotton items (card, comb, slub, PCP) use Y/R like every other item. Rotor 100% cotton skips Y/R: it uses the virgin factor (1.05) for virgin cotton only and the cotton factor (1.03) for other cotton-only mixes.</p></div></details>
+          <p>Ring and Vortex 100% cotton items (card, comb, slub, PCP) use Y/R like every other item. Rotor uses Y/R% for every fibre too, from the master OE Yarn realization table.</p></div></details>
         <details class="qa" data-grp="faq"><summary>How is the margin type decided?</summary><div class="qa-a">
           <p>By the margin per month on 1000 spindles: <b>Very Good</b> above 10,000, <b>Good</b> above 6,000, <b>Avg.</b> above 3,000, <b>Poor</b> above 0 and <b>Negative</b> otherwise. Enter a selling price to see it.</p></div></details>
         <details class="qa" data-grp="faq"><summary>What does “Use this price” do?</summary><div class="qa-a">
@@ -957,7 +957,7 @@ function vSet(m){mc=m;$('V_q').value='';$('V_fx').value=mem[m].fx;vBuild()}
 /* ---------- Rotor ---------- */
 const RG_COT=[3,4,57,5,6,7,8,9,10,11,12,13,14],RG_RC=[15,16],RG_PO=[17,18,19,20],RG_OT=[];for(let i=21;i<=56;i++)RG_OT.push(i);RG_OT.push(58);
 /* role: [label, price, Y/R %, unit, grade rows (master), default grade row] */
-const RF={v:['Virgin cotton',1,90,'lb',RG_COT,3],w:['Recycled cotton',1.75,90,'kg',RG_RC,15],l:['Loose cotton',0.85,90,'lb'],d:['D1&D2',0.94,70,'kg'],n:['Noil',1.27,90,'kg'],m:['Pneumafil',0.52,90,'lb'],r:['Recycle cotton (RBD)',0.88,90,'kg'],f:['Filter white',0.79,85,'kg'],h:['Hard waste',1.36,90,'kg'],p:['Polyester',1.45,95,'kg',RG_PO,17],
+const RF={v:['Virgin cotton',1,90,'lb',RG_COT,3],w:['Recycled cotton',1.75,70,'kg',RG_RC,15],l:['Loose cotton',0.85,90,'lb'],d:['D1&D2',0.94,70,'kg'],n:['Noil',1.27,90,'kg'],m:['Pneumafil',0.52,90,'lb'],r:['Recycle cotton (RBD)',0.88,70,'kg'],f:['Filter white',0.79,85,'kg'],h:['Hard waste',1.36,90,'kg'],p:['Polyester',1.45,95,'kg',RG_PO,17],
   x:['Virgin cotton (2nd grade)',1.05,90,'lb',RG_COT,5],q:['Polyester (2nd grade)',1.55,95,'kg',RG_PO,19],z:['Viscose / other fibre',2,95,'kg',RG_OT,30]};
 const RK_MAIN=['v','w','l','d','n','m','r','f','h','p'],RK_MORE=['x','q','z'],RK=[...RK_MAIN,...RK_MORE],NC='pqz';
 const RS={};RK.forEach(k=>{const g=RF[k][5];if(g){RS[k]=g;if(P[g])RF[k][1]=P[g][1]}});
@@ -1039,8 +1039,8 @@ function rCalc(){
   let rm=0,sum=0,onlyCot=true,onlyVir=true;const rows=[],parts=[];
   RK.forEach(k=>{const m=+$('R_m_'+k).value;if(m&&NC.includes(k))onlyCot=false;if(m&&!'vx'.includes(k))onlyVir=false;const pv=+$('R_p_'+k).value,kg=pv*(RF[k][3]==='lb'?2.2046:1);$('R_k_'+k).textContent=fmt(kg,2);$('R_s_'+k).textContent=(pv>0?pstr(pv)+' '+rUn(k):'no price')+' · Y/R '+(+$('R_y_'+k).value)+'%'});
   RK.forEach(k=>{const m=+$('R_m_'+k).value;sum+=m;$('R_mx_'+k).classList.toggle('on',m>0);if(!m)return;
-    const pk=+$('R_p_'+k).value*(RF[k][3]==='lb'?2.2046:1),y=+$('R_y_'+k).value,kk=onlyVir?kv:k1,clean=onlyCot?pk*kk:pk/y*100;rm+=clean*m/100;parts.push(clean*m/100);
-    rows.push([rn(k)+' · '+m+'%',fmt(clean*m/100),(onlyCot?(onlyVir?'100% virgin factor ×':'Cotton factor ×')+kk:'Y/R '+y+'%')+trTxt(rtr(k))])});
+    const pk=+$('R_p_'+k).value*(RF[k][3]==='lb'?2.2046:1),y=+$('R_y_'+k).value,clean=pk/y*100;rm+=clean*m/100;parts.push(clean*m/100);
+    rows.push([rn(k)+' · '+m+'%',fmt(clean*m/100),('Y/R '+y+'%')+trTxt(rtr(k))])});
   const miss=RK.filter(k=>+$('R_m_'+k).value>0&&!(+$('R_p_'+k).value>0)).map(k=>rn(k));
   $('R_warn').hidden=!miss.length;$('R_warn').textContent=miss.length?'Price is missing for '+miss.join(', ')+'. Enter it under Fibre prices below.':'';
   if(RK_MORE.some(k=>+$('R_m_'+k).value>0))$('R_more').open=true;
