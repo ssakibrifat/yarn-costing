@@ -959,7 +959,7 @@ function vSet(m){mc=m;$('V_q').value='';$('V_fx').value=mem[m].fx;vBuild()}
 /* ---------- Rotor ---------- */
 const RG_COT=[3,4,57,5,6,7,8,9,10,11,12,13,14],RG_RC=[15,16],RG_PO=[17,18,19,20],RG_OT=[];for(let i=21;i<=56;i++)RG_OT.push(i);RG_OT.push(58);
 /* role: [label, price, Y/R %, unit, grade rows (master), default grade row] */
-const RF={v:['Virgin cotton',1,90,'lb',RG_COT,3],w:['Recycled cotton',1.75,70,'kg',RG_RC,15],l:['Loose cotton',0.85,90,'lb'],d:['D1&D2',0.94,70,'kg'],n:['Noil',1.27,90,'kg'],m:['Pneumafil',0.52,90,'lb'],r:['Recycle cotton (RBD)',0.88,70,'kg'],f:['Filter white',0.79,85,'kg'],h:['Hard waste',1.36,90,'kg'],p:['Polyester',1.45,95,'kg',RG_PO,17],
+const RF={v:['Virgin cotton',1,90,'lb',RG_COT,3],w:['Recycled cotton',1.75,70,'kg',RG_RC,15],l:['Loose cotton',0.85,90,'lb'],d:['D1&D2',0.94,70,'kg'],n:['Noil',1.27,90,'kg'],m:['Pneumafil',0.52,90,'lb'],r:['Recycle cotton (RBD)',0.88,90,'kg'],f:['Filter white',0.79,85,'kg'],h:['Hard waste',1.36,90,'kg'],p:['Polyester',1.45,95,'kg',RG_PO,17],
   x:['Virgin cotton (2nd grade)',1.05,90,'lb',RG_COT,5],q:['Polyester (2nd grade)',1.55,95,'kg',RG_PO,19],z:['Viscose / other fibre',2,95,'kg',RG_OT,30]};
 const RK_MAIN=['v','w','l','d','n','m','r','f','h','p'],RK_MORE=['x','q','z'],RK=[...RK_MAIN,...RK_MORE],NC='pqz';
 const RS={};RK.forEach(k=>{const g=RF[k][5];if(g){RS[k]=g;if(P[g])RF[k][1]=P[g][1];if(D.Y&&D.Y[g])RF[k][2]=D.Y[g]}});
@@ -980,18 +980,18 @@ const RP=[
 ['11 PC (50:50) KW Non virgin','pw',20,'n30f25p45','Up to 20s.',[['No Filter: use Recycle cotton','f>r']]],
 ['12 PC (65:35) KW Non virgin','pw65',20,'f20r20p60','Up to 20s.'],
 ['13 Cotton-KH Virgin Slub','slcv',30,'v100','Slub. Cotton 100%. Std sheet counts 20, 24, 30.'],
-['14 Cotton Non virgin Slub','slcn',16,'v50n50','Slub. Std sheet counts 6.5, 8, 12, 16. The sheet has no mix for this, so Virgin 50 / Noil 50 is used. Edit if needed.'],
+['14 Cotton Non virgin Slub','slcn',16,'v50n50','Slub. Std sheet counts 6.5, 8, 12, 16. Default Virgin 50 / Noil 50; the factory runs 6.5/1 KW slub as Loose 80 / RBD 20.',[['Loose 80 / RBD 20 (factory KW slub)','=l80r20']]],
 ['15 100% Viscose Slub','slvi',30,'z100','Slub. Viscose 100%. Std sheet counts 16, 20, 24, 30.'],
 ['16 CVC KH Virgin Slub','slcp',30,'v60p40','Slub. Cotton 60 / poly 40 as in Ring CVC 60/40. Edit the mix to match.'],
 ['17 PC KH Virgin Slub','slcp',30,'v35p65','Slub. Cotton 35 / poly 65 as in Ring PC 65/35. Edit the mix to match.'],
 ['18 PV (65:35)','pv',20,'p65z35','Poly 65 / Viscose 35. Std sheet counts 7 and 20.'],
 ['19 Denim (100% KW Non virgin)','dn',99,'v50d50','Denim. Counts 6, 7 and 9 run TM 5.4 at 95,000 / 90,000 / 95,000 rpm. For a Regenagri or other cotton grade, choose it in the fibre box. Virgin 70 / RBD 30 has its own TM and speed (7s: TM 5.4, 8s: TM 5.3, both 90,000 rpm) and runs at the normal 0.94 efficiency.',[['Virgin 50 / D1D2 50','=v50d50',CDP],['Virgin 70 / Hard waste 30','=v70h30',CDP],['Virgin 70 / RBD 30','=v70r30',null,'dn2']],null,1]];
-const RT={cv:[[8,3.6,90000],[10,3.6,100000],[12,3.8,120000],[14,4,110000],[16,4,115000],[18,3.8,120000],[20,4,135000],[22,4,145000],[24,4,145000],[26,4,145000],[28,4,150000],[30,4.3,150000],[32,4.2,150000]],
+const RT={cv:[[8,3.6,90000],[10,3.6,100000],[12,3.8,120000],[14,4,110000],[16,3.8,115000],[18,4,115000],[20,4,135000],[22,4,145000],[24,4,145000],[26,4,145000],[28,4,150000],[30,4.3,150000],[32,4.2,150000]],
 cnv:[[8,3.8,90000],[10,4,90000],[14,5.2,100000],[16,4.4,105000],[20,4,145000]],
-cvcv:[[8,3.3,85000],[10,3.3,95000],[12,3.4,100000],[16,4,100000],[20,4,100000],[30,4,115000]],
+cvcv:[[8,3.3,85000],[10,3.3,95000],[12,3.4,100000],[16,4,100000],[20,3.8,100000],[30,4,115000]],
 cvn:[[7,3.5,85000],[8,3.6,85000],[10,3.6,90000],[12,3.8,95000],[16,3.8,100000],[18,3.8,100000],[20,4,100000],[28,4.2,140000],[30,4.4,140000],[32,4.4,140000]],
 pk:[[7,4.5,90000],[12,3.5,90000],[16,3.4,95000],[20,3.6,95000]],
-ckw:[[6,5,100000],[7,5,90000],[9,5,105000]],
+ckw:[[6,5,80000],[7,5,90000],[8,5.5,100000],[9,5,105000]],
 dn2:[[7,5.4,90000],[8,5.3,90000]],
 dn:[[6,5.4,95000],[7,5.4,90000],[8,5,90000],[9,5.4,95000],[10,5.2,90000]],
 pw:[[7,4.5,73000],[10,3.8,80000],[16,4.5,90000],[20,4.5,93000]],
@@ -1003,7 +1003,7 @@ slcn:[[6.5,5,75000],[8,5.5,70000],[12,5.5,70000],[16,5.5,70000]],
 slvi:[[16,4,70000],[20,4.2,80000],[24,4.2,80000],[30,4.5,90000]],
 slcp:[[16,4.5,70000],[20,4.8,80000],[24,4.8,80000],[30,4.8,90000]],
 pv:[[7,3.8,80000],[20,3.8,140000]],
-cvn8:[[10,4,85000],[12,4,85000],[16,4,100000],[20,4.2,100000],[28,4.2,140000],[30,4.4,140000],[32,4.4,140000]],
+cvn8:[[10,4,85000],[12,4,85000],[16,4.2,100000],[20,4.2,100000],[28,4.2,140000],[30,4.4,140000],[32,4.4,140000]],
 pw65:[[7,4.5,90000],[10,3.8,80000],[16,4.5,90000],[20,4.5,93000]],
 pk65:[[7,4.5,90000],[12,3.5,90000],[16,4.5,90000],[20,3.6,95000]]};
 $('R_grp').innerHTML=RP.map((p,i)=>`<option value="${i}">${esc(p[0])}</option>`).join('');
